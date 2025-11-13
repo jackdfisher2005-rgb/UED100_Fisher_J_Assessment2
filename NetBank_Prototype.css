@@ -1,4 +1,7 @@
-body { font-family: system-ui, Arial, sans-serif; margin: 0; background: #f7f7f7da; color: #222; }
+body { font-family: system-ui, Arial, sans-serif; margin: 0; background: #e4e3e3; color: #222; }
 .container { max-width: 1100px; margin: 0 auto; padding: 16px; }
 .topbar { background: #f1da06; border-bottom: 1px solid #ddd; padding: 12px 0; }
 .logo { margin: 0; font-size: 2rem; color: #000000; }
+.topnav ul { list-style: none; display: flex; gap: 16px; padding: 0; margin: 0; align-items: center; }
+.topnav a { text-decoration: none; background: none; border: none; padding: 8px 12px; cursor: pointer; }
+.topnav li:last-child, .logout { color: #b80000; padding: 8px 12px; cursor: pointer; margin-left: auto;}
