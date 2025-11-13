@@ -2,7 +2,11 @@ body { font-family: system-ui, Arial, sans-serif; margin: 0; background: #e4e3e3
 .container { max-width: 1100px; margin: 0 auto; padding: 16px; }
 .topbar { background: #f1da06; border-bottom: 1px solid #ddd; padding: 12px 0; }
 .logo { margin: 0; font-size: 2rem; color: #000000; }
-.topnav { display: flex; justify-content: space-between; align-items: center; }
+.topnav { display: flex; justify-content: space-between; align-items: flex-start; }
 .topnav a { text-decoration: none; background: none; border: none; padding: 8px 12px; cursor: pointer; }
 .nav-links { display: flex; gap: 16px; list-style: none; padding: 0; margin: 0; }
-.logout { color: #b80000; background: #e4e3e3; border: 1px solid #b80000; padding: 8px 12px; border-radius: 6px; cursor: pointer; }
+.logout { color: #b80000; background: #e4e3e3; border: 1px solid #b80000; padding: 8px 12px; border-radius: 6px; cursor: pointer; margin-top: -30px; }
+.accounts-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 16px; margin-top: 16px; }
+.account-card { background: #fff; padding: 16px; border-radius: 12px; border: 1px solid #eee; box-shadow: 0 2px 4px rgba(0,0,0,.05); }
+.acc-number { font-size: 0.85rem; color: #919191; margin-top: -12px; }
+.balance { font-size: 1.4rem; font-weight: 600; }
