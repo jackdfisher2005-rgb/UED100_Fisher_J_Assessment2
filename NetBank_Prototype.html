@@ -1,3 +1,8 @@
+<!--
+Created by Jack Fisher - A00150544 
+13-11-2025
+-->
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -22,6 +27,7 @@
   </header>
   <main class="container accounts-page">
     <h2>Your Accounts</h2>
+    <!-- Display grid of account cards with view transaction buttons -->
     <section class="accounts-list" id="accounts">
       <article class="account-card" data-account="smartaccess">
         <h3>Smart Access</h3>
@@ -42,6 +48,7 @@
         <button class="view-transactions" data-target="credit">View Transactions</button>
       </article>
     </section>
+    <!-- Transaction details panel - hidden by default, shown when an account is selected -->
     <section class="transactions" hidden>
       <button id="backtoaccounts" class="back-btn">← Back to Accounts</button>
       <h3 id="transactiontitle">Transactions</h3>

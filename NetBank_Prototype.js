@@ -1,3 +1,4 @@
+// Transaction records for each account type
 const transactionsData = {
   smartaccess: [
     { date: "05 Nov", desc: "Woolworths", amount: "-$45.20" },
@@ -19,10 +20,13 @@ const list = document.getElementById("transactionlist");
 const title = document.getElementById("transactiontitle");
 const back = document.getElementById("backtoaccounts");
 
+// Add click listeners to all View Transactions buttons
 document.querySelectorAll(".view-transactions").forEach(btn => {
   btn.addEventListener("click", () => loadTransactions(btn.dataset.target));
 });
 
+// Load and display transactions for selected account
+// Special handling for smartaccess to display as "Smart Access Account" instead of "Smartaccess Account"
 function loadTransactions(acc) {
   list.innerHTML = "";
   let accountName = acc.charAt(0).toUpperCase() + acc.slice(1) + " Account";
@@ -39,6 +43,7 @@ function loadTransactions(acc) {
   panel.hidden = false;
 }
 
+// Hide transaction panel and show accounts list
 back.addEventListener("click", () => {
   panel.hidden = true;
   document.getElementById("accounts").hidden = false;
