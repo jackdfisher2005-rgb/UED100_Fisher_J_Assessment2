@@ -1,4 +1,6 @@
-// Transaction records for each account type
+// Module wrapper to contain scope and avoid polluting globals
+(function () {
+  // Transaction records for each account type
 const transactionsData = {
   smartaccess: [
     { date: "05 Nov", desc: "Woolworths", amount: "-$45.20" },
@@ -16,43 +18,64 @@ const transactionsData = {
 };
 
 const panel = document.querySelector(".transactions");
-const list = document.getElementById("transactionlist");
-const title = document.getElementById("transactiontitle");
-const back = document.getElementById("backtoaccounts");
+  const list = document.getElementById("transactionlist");
+  const title = document.getElementById("transactiontitle");
+  const back = document.getElementById("backtoaccounts");
 
-// Add click listeners to all View Transactions buttons
-document.querySelectorAll(".view-transactions").forEach(btn => {
-  btn.addEventListener("click", () => loadTransactions(btn.dataset.target));
-});
+  // Known account keys (used to validate incoming `acc` values)
+  const allowedAccounts = Object.keys(transactionsData);
 
-// Load and display transactions for selected account
-// Special handling for smartaccess to display as "Smart Access Account" instead of "Smartaccess Account"
-function loadTransactions(acc) {
-  list.innerHTML = "";
-  let accountName = acc.charAt(0).toUpperCase() + acc.slice(1) + " Account";
-  if (acc === "smartaccess") {
-    accountName = "Smart Access Account";
-  }
-  title.textContent = accountName;
-  transactionsData[acc].forEach(t => {
-    const li = document.createElement("li");
-    li.innerHTML = `<span>${t.date} — ${t.desc}</span><strong>${t.amount}</strong>`;
-    list.appendChild(li);
+  // Add click listeners to all View Transactions buttons
+  document.querySelectorAll(".view-transactions").forEach(btn => {
+    btn.addEventListener("click", () => loadTransactions(btn.dataset.target));
   });
-  document.getElementById("accounts").hidden = true;
-  panel.hidden = false;
-}
 
-// Hide transaction panel and show accounts list
-back.addEventListener("click", () => {
-  panel.hidden = true;
-  document.getElementById("accounts").hidden = false;
-});
+  // Load and display transactions for selected account
+  // Special handling for smartaccess to display as "Smart Access Account" instead of "Smartaccess Account"
+  function loadTransactions(acc) {
+    list.textContent = "";
+    let accountName = acc.charAt(0).toUpperCase() + acc.slice(1) + " Account";
+    if (acc === "smartaccess") {
+      accountName = "Smart Access Account";
+    }
+    title.textContent = accountName;
+    // Make title programmatically focusable for accessibility
+    title.tabIndex = -1;
+    transactionsData[acc].forEach(t => {
+      const li = document.createElement("li");
 
-// Hide transaction panel on Escape key press
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && !panel.hidden) {
-    panel.hidden = true;
-    document.getElementById("accounts").hidden = false;
+      const span = document.createElement("span");
+      span.textContent = `${t.date} — ${t.desc}`;
+
+      const strong = document.createElement("strong");
+      strong.textContent = t.amount;
+
+      li.appendChild(span);
+      li.appendChild(strong);
+      list.appendChild(li);
+    });
+    document.getElementById("accounts").hidden = true;
+    panel.hidden = false;
+    // Move focus to back button so keyboard users can easily close the panel
+    back.focus();
   }
-});
+
+  // Hide transaction panel and show accounts list
+  back.addEventListener("click", () => {
+    panel.hidden = true;
+    const accountsSection = document.getElementById("accounts");
+    if (accountsSection) accountsSection.hidden = false;
+    // Restore focus to the first view button
+    const firstBtn = document.querySelector(".view-transactions");
+    if (firstBtn) firstBtn.focus();
+  });
+
+  // Hide transaction panel on Escape key press
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !panel.hidden) {
+      panel.hidden = true;
+      document.getElementById("accounts").hidden = false;
+    }
+  });
+
+})();
