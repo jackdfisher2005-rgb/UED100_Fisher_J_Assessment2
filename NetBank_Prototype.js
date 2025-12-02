@@ -48,3 +48,11 @@ back.addEventListener("click", () => {
   panel.hidden = true;
   document.getElementById("accounts").hidden = false;
 });
+
+// Hide transaction panel on Escape key press
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !panel.hidden) {
+    panel.hidden = true;
+    document.getElementById("accounts").hidden = false;
+  }
+});

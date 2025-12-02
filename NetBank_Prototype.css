@@ -6,6 +6,7 @@ body { font-family: system-ui, Arial, sans-serif; margin: 0; background: #e9e9e9
 .topnav { display: flex; justify-content: space-between; align-items: flex-start; }
 .topnav a { text-decoration: none; background: none; border: none; padding: 8px 12px; cursor: pointer; }
 .nav-links { display: flex; gap: 16px; list-style: none; padding: 0; margin: 0; }
+:focus { outline: 3px solid #0066a1; outline-offset: 3px; }
 .logout { color: #b80000; background: #e4e3e3; border: 1px solid #b80000; padding: 8px 12px; border-radius: 6px; cursor: pointer; margin-top: -30px; }
 /* Responsive grid layout for account cards */
 .accounts-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 16px; }
